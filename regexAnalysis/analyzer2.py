@@ -4,13 +4,14 @@ import re
 class Analyzer:
     def __init__(self):
         #TODO make up scripts to test function declerations
-        self.js_file = "function Rectangle {constructor(height, width) {this.height = height;\
-               this.width = width;} get area(){return this.calcArea();}  \
-               calcArea() {return this.height * this.width; }}const square = \
+        self.js_file = " Rectangle class constructor (height, width) {this.height = height;\
+                this.width = width;} get class area(){return this.calcArea();}  \
+               calcArea() { function return this.height * this.width; }}const square = \
                function new Rectangle (10, 10);console.log(square.area);"
 
     def find_class(self):
-        class_name_finder = re.match(r'^class.(\w+)', self.js_file)
+        #  class_name_finder = re.match(r'^class.(\w+)', self.js_file)
+        class_name_finder = re.search(r'class.(\w+)', self.js_file)
         if class_name_finder is not None:
             class_name = class_name_finder.group().split()[-1]
             print(class_name)
@@ -29,7 +30,7 @@ class Analyzer:
 
     def find_function_1(self):
         #TODO make findall() read though multipile lines
-        func_declaration_1 = re.findall(r'^function.(\w+)',self.js_file)
+        func_declaration_1 = re.findall(r'function.(\w+)',self.js_file)
         if func_declaration_1 is not None:
             function_name = func_declaration_1
             #function_list.append(func_declaration_1.group().split()[-1])
