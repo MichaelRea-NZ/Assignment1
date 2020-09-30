@@ -5,9 +5,10 @@ from analyzer import Analyzer
 if __name__ == '__main__':
     analyzer = Analyzer()
     analyzer.find_class()
+    analyzer.find_property()
     analyzer.find_function_1()
     #analyzer.find_function_2()
-    analyzer.find_property()
-    analyzer.combined_declarations()
+    analyzer.create_file()
+
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
