@@ -1,6 +1,7 @@
 import sys
+import os
 from cmd import Cmd
-
+from  analyzer import Analyzer
 
 
 class GilliamPrompt(Cmd):
@@ -37,11 +38,14 @@ class GilliamPrompt(Cmd):
 
     def do_analyzer(self, arg):
         """Enter 'analyzer' to analysis the selected file."""
+        analyzer.find_class()
         print('Running analyzer')
         # call file analyzer
 
     def do_draw(self, arg):
         """Enter 'draw' to draw the selected file."""
+        os.system( “Graphviz\\bin\\dot.exe - O - Tjpeg
+        your_own_dot_file_path\\classfile.dot “)
         print("Drawing UML diagram")
         # call file drawer
 
