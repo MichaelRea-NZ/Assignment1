@@ -1,7 +1,8 @@
 import sys
 import os
 from cmd import Cmd
-from  analyzer import Analyzer
+from analyzer import Analyzer
+from PIL import Image
 
 
 class GilliamPrompt(Cmd):
@@ -17,6 +18,7 @@ class GilliamPrompt(Cmd):
               "commands in help and what they do.\n"
               "\nselect_file\t\tEnter 'select_file' to enter the file " +
               "path of the JavaScript file that requires a UML diagram.\n"
+              "\ndisplay\t\tEnter 'display' to view the drawing.\n"
               "\nshut\t\tEnter 'shut y' To leave the program.")
 
     def do_select_file(self, arg):
@@ -32,22 +34,32 @@ class GilliamPrompt(Cmd):
 
 
     def do_open_file(self, file_name):
-        file = open(file_name)
-        print("\n Hi", file_name, "\n")
-        print(file.read())
+        if (file_name.endswith(".js")):
+            file = open(file_name)
+            print("\n Hi", file_name, "\n")
+            print(file.read())
+        else:
+            print("The file is not a JavaScript file")
 
     def do_analyzer(self, arg):
         """Enter 'analyzer' to analysis the selected file."""
-        analyzer.find_class()
+        Analyzer.find_class(self)
+        Analyzer.find_property(self)
+        Analyzer.find_function_1(self)
+        Analyzer.create_file(self)
         print('Running analyzer')
+        #print(Analyzer.property_name)
         # call file analyzer
 
     def do_draw(self, arg):
         """Enter 'draw' to draw the selected file."""
-        os.system( “Graphviz\\bin\\dot.exe - O - Tjpeg
-        your_own_dot_file_path\\classfile.dot “)
+        os.system("Graphviz\\bin\\dot.exe  -Tpng -O classfile.dot")
         print("Drawing UML diagram")
-        # call file drawer
+
+    def do_display(self, arg):
+        """Enter 'display' to view the drawing."""
+        diagram = Image.open('classfile.dot.png')
+        diagram.show()
 
     def do_shut(self, args):
         """ Enter 'shut y' To leave the program."""
