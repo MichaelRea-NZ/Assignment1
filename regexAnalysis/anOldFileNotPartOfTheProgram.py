@@ -29,3 +29,30 @@ def find_function_2(func, js_file):
         if find_function_2 is not None:
             function_list.append(func_declaration_2.group().split()[-1])
             print(function_list)
+
+            
+ """func_declaration_1 = re.findall(r'^function.(\w+)', js_file)
+func_declaration_2 = re.findall(r' \w+ ?=[= (.+) =>]', js_file)
+def find_function(func, js_file):
+    if find_function is not None:
+        function_list.append(func.group().split()[-1])
+    else:
+        print("no functions found")
+print(function_list)
+find_function(func_declaration_1, js_file)
+find_function(func_declaration_2, js_file)"""
+
+# def find_class(func, js_file):
+#     print(js_file)
+#     class_name_finder = re.match(r'^class.(\w+)', js_file)
+#     if class_name_finder is not None:
+#         print(class_name_finder.group().split()[-1] + '\n')
+#         class_name = class_name_finder.group().split()[-1]
+#         print(class_name)
+#         find_class(class_name_finder, js_file)
+
+ # def find_function_2(self):
+    # func_declaration_2 = re.findall(r'\w+ ?=[=\\.+)=>]', self.js_file)
+    # if func_declaration_2 is not None:
+    # function_name =func_declaration_2
+    # print(function_name)
