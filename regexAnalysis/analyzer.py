@@ -1,17 +1,15 @@
 import re
-#from interface import Interface
+
 
 class Analyzer:
     def __init__(self):
         self.js_file = " class Rectangle constructor (height, width) {this.height = height;\
             this.width = width;} get class area(){return this.calcArea();}  \
-            this.speed = speed;        this.name = name;\
-            calcArea() { function return this.height * this.width; }}const square = \
+            this.speed = speed;        this.name = name; calcArea() \
+            { function return this.height * this.width; }} = const square\
             function new Rectangle (10, 10);console.log(square.area);"
 
     def find_class(self):
-        #  class_name_finder = re.match(r'^class.(\w+)', self.js_file)
-        #Use search instead of match as match only searches the first line.
         global class_name
         class_name = re.search(r'class.(\w+)', self.js_file)
         if class_name is not None:
@@ -28,7 +26,7 @@ class Analyzer:
             first_list = property_name
             print(first_list)
             property_name = list(dict.fromkeys(first_list))
-            property_name = (['{}\l'.format(i) for  i in property_name])
+            property_name = (['{}\l'.format(i) for i in property_name])
             property_name = " ".join(property_name)
             print(property_name)
 
@@ -47,7 +45,8 @@ class Analyzer:
 fontsize = 8 node [fontname = "Bitstream Vera Sans"\
 fontsize = 8 shape = "record"]\
 edge [fontname = "Bitstream Vera Sans"fontsize = 8]\
- {class_name}[ label = " {{{class_name}| {property_name}|{function_name}}}"]}}')
+ {class_name}[ label = " {{{class_name}| {property_name}|{function_name}}\
+ }"]}}')
         dot_file1.close()
         dot_file1 = open("classfile.dot", "r")
         print(dot_file1.read())
