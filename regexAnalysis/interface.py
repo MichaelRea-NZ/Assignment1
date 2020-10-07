@@ -32,7 +32,6 @@ class GilliamPrompt(Cmd):
             print("!", file_name, "\n")
             self.do_open_file(file_name)
 
-
     def do_open_file(self, file_name):
         if (file_name.endswith(".js")):
             file = open(file_name)
@@ -48,7 +47,6 @@ class GilliamPrompt(Cmd):
         Analyzer.find_function_1()
         Analyzer.create_file()
         print('Running analyzer')
-        #print(Analyzer.property_name)
         # call file analyzer
 
     def do_draw(self, arg):
@@ -74,4 +72,3 @@ if __name__ == '__main__':
     prompt.prompt = '>->-> '
     prompt.cmdloop('\nWelcome to Gilliam the JS class diagram drawer.\
                     \nType help or ? for a list of commands')
-    
