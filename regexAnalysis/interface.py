@@ -44,9 +44,9 @@ class GilliamPrompt(Cmd):
     def do_analyzer(self, arg):
         """Enter 'analyzer' to analysis the selected file."""
         Analyzer.find_class(self)
-        Analyzer.find_property(self)
-        Analyzer.find_function_1(self)
-        Analyzer.create_file(self)
+        Analyzer.find_property()
+        Analyzer.find_function_1()
+        Analyzer.create_file()
         print('Running analyzer')
         #print(Analyzer.property_name)
         # call file analyzer
@@ -74,3 +74,4 @@ if __name__ == '__main__':
     prompt.prompt = '>->-> '
     prompt.cmdloop('\nWelcome to Gilliam the JS class diagram drawer.\
                     \nType help or ? for a list of commands')
+    
