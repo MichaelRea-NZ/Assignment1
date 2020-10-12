@@ -9,6 +9,10 @@ class GilliamPrompt(Cmd):
     doc_header = "Here are the list of commands in help.\n To get help on a "\
      "command, enter 'help' followed by command name'."
 
+    def __init__(self):
+        Cmd.__init__(self)
+        self.js_file_content = ""
+
     def do_help_list(self, arg):
         """Enter 'help_list to see a list of all the commands in help """ \
           """and what they do."""
@@ -27,27 +31,35 @@ class GilliamPrompt(Cmd):
         print('Enter the file path and file name of the file that ' +
               'requires analyzing')
         # call file opener
-        if arg != '':
+        if (arg.endswith(".js")):
             file_name = arg
             print("!", file_name, "\n")
             self.do_open_file(file_name)
-
-    def do_open_file(self, file_name):
-        if (file_name.endswith(".js")):
-            file = open(file_name)
-            print("\n Hi", file_name, "\n")
-            print(file.read())
         else:
             print("The file is not a JavaScript file")
 
-    def do_analyzer(self, arg):
-        """Enter 'analyzer' to analysis the selected file."""
-        Analyzer.find_class(self)
-        Analyzer.find_property()
-        Analyzer.find_function_1()
-        Analyzer.create_file()
-        print('Running analyzer')
-        # call file analyzer
+    def do_open_file(self, file_name):
+        if file_name != '':
+            file = open(file_name)
+            self.js_file_content = file.read()
+            print("\n Hi", file_name, "\n")
+            print(self.js_file_content)
+
+    def do_analyse(self, arg):
+        analyzer = Analyzer(self.js_file_content)
+        analyzer.find_class()
+        analyzer.find_property()
+        analyzer.find_function_1()
+        analyzer.create_file()
+
+    # def do_analyzer(self, arg):
+    #     """Enter 'analyzer' to analysis the selected file."""
+    #     Analyzer.find_class(self)
+    #     Analyzer.find_property()
+    #     Analyzer.find_function_1()
+    #     Analyzer.create_file()
+    #     print('Running analyzer')
+    #     # call file analyzer
 
     def do_draw(self, arg):
         """Enter 'draw' to draw the selected file."""
