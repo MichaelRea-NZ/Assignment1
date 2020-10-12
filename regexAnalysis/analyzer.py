@@ -2,12 +2,13 @@ import re
 
 
 class Analyzer:
-    def __init__(self):
-        self.js_file = " class Rectangle constructor (height, width) {this.height = height;\
-            this.width = width;} get class area(){return this.calcArea();}  \
-            this.speed = speed;        this.name = name; calcArea() \
-            { function return this.height * this.width; }} = const square\
-            function new Rectangle (10, 10);console.log(square.area);"
+    def __init__(self, file_content):
+        # self.js_file = " class Rectangle constructor (height, width) {this.height = height;\
+        #     this.width = width;} get class area(){return this.calcArea();}  \
+        #     this.speed = speed;        this.name = name; calcArea() \
+        #     { function return this.height * this.width; }} = const square\
+        #     function new Rectangle (10, 10);console.log(square.area);"
+        self.js_file = file_content
 
     def find_class(self):
         global class_name
@@ -45,8 +46,8 @@ class Analyzer:
 fontsize = 8 node [fontname = "Bitstream Vera Sans"\
 fontsize = 8 shape = "record"]\
 edge [fontname = "Bitstream Vera Sans"fontsize = 8]\
- {class_name}[ label = " {{{class_name}| {property_name}|{function_name}}\
- }"]}}')
+ {class_name}[ label = " {{{class_name}| {property_name}|{function_name}\
+}}"]}}')
         dot_file1.close()
         dot_file1 = open("classfile.dot", "r")
         print(dot_file1.read())
