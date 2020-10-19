@@ -3,19 +3,21 @@ import os
 from cmd import Cmd
 from analyzer import Analyzer
 from PIL import Image
+from pickler import Pickles
 
 
 class GilliamPrompt(Cmd):
-    doc_header = "Here are the list of commands in help.\n To get help on a "\
-     "command, enter 'help' followed by command name'."
+    doc_header = "Here are the list of commands in help.\n To get help on a " \
+                 "command, enter 'help' followed by command name'."
 
     def __init__(self):
         Cmd.__init__(self)
         self.js_file_content = ""
+        self.js_pickle_file = ""
 
     def do_help_list(self, arg):
-        """Enter 'help_list to see a list of all the commands in help """ \
-          """and what they do."""
+        """Enter 'help_list to see a list of all the commands in help """
+        """and what they do."""
         print("analyzer\t\tEnter 'analyzer' to analysis the selected file.\n"
               "\ndraw\t\tEnter 'draw' to draw the selected file.\n"
               "\nhelp_list\t\tEnter 'help_list to see a list of all the " +
@@ -26,8 +28,8 @@ class GilliamPrompt(Cmd):
               "\nshut\t\tEnter 'shut y' To leave the program.")
 
     def do_select_file(self, arg):
-        """Enter 'select_file' to enter the file path of the JavaScript"""\
-         """file that requires a UML diagram """
+        """Enter 'select_file' to enter the file path of the JavaScript"""
+        """file that requires a UML diagram """
         print('Enter the file path and file name of the file that ' +
               'requires analyzing')
         # call file opener
@@ -40,10 +42,14 @@ class GilliamPrompt(Cmd):
 
     def do_open_file(self, file_name):
         if file_name != '':
-            file = open(file_name)
-            self.js_file_content = file.read()
-            print("\n Hi", file_name, "\n")
-            print(self.js_file_content)
+            try:
+                file = open(file_name)
+            except FileNotFoundError:
+                print("The file does not exist at that location")
+            else:
+                self.js_file_content = file.read()
+                print("\n Hi", file_name, "\n")
+                print(self.js_file_content)
 
     def do_analyse(self, arg):
         analyzer = Analyzer(self.js_file_content)
@@ -70,6 +76,14 @@ class GilliamPrompt(Cmd):
         """Enter 'display' to view the drawing."""
         diagram = Image.open('classfile.dot.png')
         diagram.show()
+
+    def do_pickle(self, arg):
+        pickler = Pickles(self.js_file_content)
+        pickler.create_pickle()
+
+    def do_open_pickle(self, arg):
+        pickler = Pickles(self.js_file_content)
+        pickler.open_pickle()
 
     def do_shut(self, args):
         """ Enter 'shut y' To leave the program."""
