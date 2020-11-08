@@ -13,7 +13,7 @@ class GilliamPrompt(Cmd):
     def __init__(self):
         Cmd.__init__(self)
         self.js_file_content = ""
-        #self.js_pickle_file = ""
+        self.js_pickle_file = ""
         self.arg = ""
 
     def do_help_list(self, arg):
@@ -21,9 +21,9 @@ class GilliamPrompt(Cmd):
         """and what they do."""
         print("analyzer\t\tEnter 'analyzer' to analysis the selected file.\n"
               "\ndraw\t\tEnter 'draw' to draw the selected file.\n"
-              "\nhelp_list\t\tEnter 'help_list to see a list of all the " 
+              "\nhelp_list\t\tEnter 'help_list to see a list of all the "
               "commands in help and what they do.\n"
-              "\nselect_file\t\tEnter 'select_file' to enter the file " 
+              "\nselect_file\t\tEnter 'select_file' to enter the file "
               "path of the JavaScript file that requires a UML diagram.\n"
               "\ndisplay\t\tEnter 'display' to view the drawing.\n"
               "\nshut\t\tEnter 'shut y' To leave the program.")
@@ -41,7 +41,7 @@ class GilliamPrompt(Cmd):
         # call file opener
         if (arg.endswith(".js")):
             file_name = arg
-            print('You selected ',file_name, "\n")
+            print('You selected ', file_name, "\n")
             self.open_file(file_name)
         else:
             print("The file is not a JavaScript file")
@@ -65,16 +65,6 @@ class GilliamPrompt(Cmd):
         analyzer.find_property()
         analyzer.find_function_1()
         analyzer.create_file()
-
-
-    # def do_analyzer(self, arg):
-    #     """Enter 'analyzer' to analysis the selected file."""
-    #     Analyzer.find_class(self)
-    #     Analyzer.find_property()
-    #     Analyzer.find_function_1()
-    #     Analyzer.create_file()
-    #     print('Running analyzer')
-    #     # call file analyzer
 
     def do_draw(self, arg):
         """Enter 'draw' to draw the selected file."""
@@ -109,4 +99,3 @@ if __name__ == '__main__':
     prompt.prompt = '>->-> '
     prompt.cmdloop('\nWelcome to Gilliam the JS class diagram drawer.\
                     \nType help or ? for a list of commands')
-
