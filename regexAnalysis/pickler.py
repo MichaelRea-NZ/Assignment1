@@ -13,6 +13,6 @@ class Pickles:
         print('file pickled')
 
     def open_pickle(self):
-        self.file_name = pickle.load(open('pickle_file.pickle', 'rb'))
+        self.file_name = open('pickle_file.pickle', 'rb')
         print('file opened')
         print(self.file_name)
