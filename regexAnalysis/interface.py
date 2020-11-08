@@ -13,19 +13,25 @@ class GilliamPrompt(Cmd):
     def __init__(self):
         Cmd.__init__(self)
         self.js_file_content = ""
-        self.js_pickle_file = ""
+        #self.js_pickle_file = ""
+        self.arg = ""
 
     def do_help_list(self, arg):
         """Enter 'help_list to see a list of all the commands in help """
         """and what they do."""
         print("analyzer\t\tEnter 'analyzer' to analysis the selected file.\n"
               "\ndraw\t\tEnter 'draw' to draw the selected file.\n"
-              "\nhelp_list\t\tEnter 'help_list to see a list of all the " +
+              "\nhelp_list\t\tEnter 'help_list to see a list of all the " 
               "commands in help and what they do.\n"
-              "\nselect_file\t\tEnter 'select_file' to enter the file " +
+              "\nselect_file\t\tEnter 'select_file' to enter the file " 
               "path of the JavaScript file that requires a UML diagram.\n"
               "\ndisplay\t\tEnter 'display' to view the drawing.\n"
               "\nshut\t\tEnter 'shut y' To leave the program.")
+
+        def get_do_help_list(self):
+            result = self.do_help_list(self)
+            return self.do_help_list(self)
+            print(result)
 
     def do_select_file(self, arg):
         """Enter 'select_file' to enter the file path of the JavaScript"""
@@ -35,28 +41,31 @@ class GilliamPrompt(Cmd):
         # call file opener
         if (arg.endswith(".js")):
             file_name = arg
-            print("!", file_name, "\n")
-            self.do_open_file(file_name)
+            print('You selected ',file_name, "\n")
+            self.open_file(file_name)
         else:
             print("The file is not a JavaScript file")
 
-    def do_open_file(self, file_name):
+    def open_file(self, file_name):
         if file_name != '':
             try:
                 file = open(file_name)
             except FileNotFoundError:
-                print("The file does not exist at that location")
+                print("The file does not exist at that location\n"
+                      "Please check your file and try again")
             else:
                 self.js_file_content = file.read()
                 print("\n Hi", file_name, "\n")
                 print(self.js_file_content)
 
     def do_analyse(self, arg):
+        """Enter 'analyzer' to analysis the selected file."""
         analyzer = Analyzer(self.js_file_content)
         analyzer.find_class()
         analyzer.find_property()
         analyzer.find_function_1()
         analyzer.create_file()
+
 
     # def do_analyzer(self, arg):
     #     """Enter 'analyzer' to analysis the selected file."""
@@ -78,10 +87,12 @@ class GilliamPrompt(Cmd):
         diagram.show()
 
     def do_pickle(self, arg):
+        """Enter 'pickle' to save as a pickle file."""
         pickler = Pickles(self.js_file_content)
         pickler.create_pickle()
 
     def do_open_pickle(self, arg):
+        """Enter 'open_pickle' to open the pickle file"""
         pickler = Pickles(self.js_file_content)
         pickler.open_pickle()
 
@@ -98,3 +109,4 @@ if __name__ == '__main__':
     prompt.prompt = '>->-> '
     prompt.cmdloop('\nWelcome to Gilliam the JS class diagram drawer.\
                     \nType help or ? for a list of commands')
+
