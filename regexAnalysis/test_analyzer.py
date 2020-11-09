@@ -17,20 +17,18 @@ class TestAnalyzer(unittest.TestCase):
                                           this.height this.Width')
         self.testFile4 = Analyzer('')
 
-
         self.testFile6 = Analyzer('class Rectangle \
                                         function area() function calcArea()')
 
-
         self.testFile5 = Analyzer(' class Rectangle this.height this.width \
                                               this.height this.Width')
+
         self.testFile7 = Analyzer(' Rectangle this.height this.width \
                                            function area() function calcArea()\
                                           this.height this.Width')
 
         self.testFile8 = Analyzer('class Rectangle \
-                                               function area function calcArea')
-
+                                              function area function calcArea')
 
     def test_find_class(self):
         expected = 'Rectangle'
@@ -91,12 +89,6 @@ class TestAnalyzer(unittest.TestCase):
         self.testFile5.find_function_1()
         actual = self.testFile5.get_function_name()
         self.assertEqual(expected, actual)
-
-    # def test_dot_file1(self):
-    #     expected = 'digraph G {fontname = "Bitstream Vera Sans"fontsize = 8 node [fontname = "Bitstream Vera Sans"fontsize = 8 shape = "record"]edge [fontname = "Bitstream Vera Sans"fontsize = 8] Rectangle[ label = " {Rectangle| height\l width\l|get()\l calcArea()\l}"]}'
-    #     self.testFile2.create_file()
-    #     actual = self.testFile2.do_get_create_file()
-    #     self.assertEqual(expected, actual)
 
 
 if __name__ == '__main__':
